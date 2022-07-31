@@ -15,7 +15,6 @@ namespace ATM
             decimal withdrwa;
             int wybor;
             int pin = 0;
-            int x = 0;
             bool d = true;
             Console.Write("Prosze wpisac 4 cyfrowy pin: ");
             pin = int.Parse(Console.ReadLine());
