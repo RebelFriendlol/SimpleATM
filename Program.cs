@@ -10,7 +10,7 @@ namespace ATM
     {
         static void Main(string[] args)
         {
-            decimal amount = 2137;
+            decimal amount = 213.95m;
             decimal deposit;
             decimal withdrwa;
             int wybor;
@@ -38,16 +38,28 @@ namespace ATM
                     case 2:
                         Console.Clear();
                         Console.Write("Ile chcesz wypłacić?: ");
-                        withdrwa = int.Parse(Console.ReadLine());
+                        withdrwa = Convert.ToDecimal(Console.ReadLine());
                         if (withdrwa > amount)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("PRZEPRASZAM! NIEWYSTARCZAJĄCE SALDO! \n");
+                            Console.WriteLine("\nPRZEPRASZAM! NIEWYSTARCZAJĄCE SALDO!\n");
                             Console.ResetColor();
                         }
-                        else 
+                        else if(withdrwa <= 0.99m)
                         {
-                            Console.WriteLine("Prosze zebrać pieniądze. \n");
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("\nMożna wypłacać dopiero od 1zł!\n");
+                            Console.ResetColor();
+                        }
+                        else if (withdrwa <= 0.100m)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("\nMożna wypłacać dopiero od 1zł!\n");
+                            Console.ResetColor();
+                        }
+                        else
+                        {
+                            Console.WriteLine("\nProsze zebrać pieniądze. \n");
                             amount = amount - withdrwa;
                             Console.WriteLine($"Aktualnie masz na koncie {amount} zł \n");
                         }
@@ -55,12 +67,27 @@ namespace ATM
                     case 3:
                         Console.Clear();
                         Console.Write("Ile chcesz wpłacić?: ");
-                        deposit = int.Parse(Console.ReadLine());
-                        amount = amount + deposit;
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("TWOJE PIĘNIĄDZE ZOSTAŁY WPŁACONE POMYŚLNIE!\n");
-                        Console.ResetColor();
-                        Console.WriteLine($"Aktualnie masz na koncie {amount} zł \n");
+                        deposit = Convert.ToDecimal(Console.ReadLine());
+                        if(deposit <= 0.99m)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("\nMożna wpłacać dopiero od 1zł!\n");
+                            Console.ResetColor();
+                        }
+                        else if (deposit <= 0.100m)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine("\nMożna wpłacać dopiero od 1zł!\n");
+                            Console.ResetColor();
+                        }
+                        else
+                        {
+                           amount = decimal.Add(amount, deposit);
+                           Console.ForegroundColor = ConsoleColor.Green;
+                           Console.WriteLine("\nTWOJE PIĘNIĄDZE ZOSTAŁY WPŁACONE POMYŚLNIE!\n");
+                           Console.ResetColor();
+                           Console.WriteLine($"Aktualnie masz na koncie {amount} zł \n");
+                        }                        
                         break;
                     case 4:
                         Console.WriteLine("\n THANK YOU…");
